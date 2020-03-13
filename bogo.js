@@ -1,6 +1,3 @@
-let shuffles = 0;
-let avgs = [];
-let arr = [];
 
 function betterBogo(arr, start, end) {
 	let pos = start;
@@ -35,22 +32,3 @@ function swap(arr, x, y){
 	arr[x] = arr[y];
 	arr[y] = t;
 }
-
-function mkarr(){
-	for(i=0;i<100;i++){
-		arr.push(i);
-	}
-	shuffle(arr,0,99);
-}
-
-
-mkarr();
-console.log(arr);
-for(let j=0;j<100;j++){
-	betterBogo(arr,0,99);
-	shuffle(arr, 0, 99);
-	avgs.push(shuffles);
-	shuffles=0;
-}
-let avg = Math.floor(avgs.reduce((a,b) => a + b, 0) / avgs.length);
-console.log("Average Shuffles over 100 sorts: "+avg);
