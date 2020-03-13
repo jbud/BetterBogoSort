@@ -43,12 +43,14 @@ function mkarr(){
 	shuffle(arr,0,99);
 }
 
+
 mkarr();
 console.log(arr);
 for(let j=0;j<100;j++){
 	betterBogo(arr,0,99);
 	shuffle(arr, 0, 99);
 	avgs.push(shuffles);
+	shuffles=0;
 }
-let avg = arr => arr.reduce((a,b) => a + b, 0) / arr.length;
-console.log("Average Shuffles over 100 sorts: "+shuffles);
+let avg = Math.floor(avgs.reduce((a,b) => a + b, 0) / avgs.length);
+console.log("Average Shuffles over 100 sorts: "+avg);
