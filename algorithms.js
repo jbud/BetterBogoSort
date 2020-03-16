@@ -14,6 +14,18 @@ function bogoSort(){
   }
 }
 
+function bubbleSort(){
+  if (bubblei < arr.length) {
+    for (let j = 0; j < arr.length - bubblei; j++) {
+      if (arr[j] > arr[j+1]) {
+        swap(arr, j, j + 1);
+      }
+    }
+  } else {
+    noLoop(); // array is sorted!
+  }
+  bubblei++;
+}
 
 function betterBogoSort(){
   if (pos < end - 1) {

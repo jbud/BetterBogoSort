@@ -5,7 +5,8 @@ let fr = 30; // Framerate (example: 5)
 
 let algs = {
   bogo: 'Bogo',
-  betterBogo: 'Better Bogo'
+  betterBogo: 'Better Bogo',
+  bubble: 'Bubble'
 }
 
 // Global Variables:
@@ -17,6 +18,7 @@ let arrayshuffles = 0;
 let arrayaccesses = 0;
 let sorted = false;
 let pos = 0;
+let bubblei = 0;
 
 let tmp, x, end,
   oAccesses, slider, bStart,
@@ -46,25 +48,39 @@ function setup() {
   pos = 0;
 
   // setup some interactivity:
+  createSpan('Algorithm:');
   lAlg = createSelect();
   lAlg.option(algs.betterBogo);
   lAlg.option(algs.bogo);
-  bStart = createButton('Sort!');
+  lAlg.option(algs.bubble);
   lAlg.changed(reset);
-  bStart.mousePressed(begin);
-  iCount = createInput(arrsize.toString());
-  iCount.input(function(){
-    arrsize = this.value();
-    reset();
-  });
 
+  createSpan('Array Size (2-'+Math.floor(wi/2)+')');
+  iCount = createInput(arrsize.toString());
+  iCount.attribute("onclick","this.select()");
+  iCount.input(function(){
+    if(!isNaN(this.value()) &&
+          this.value() <= Math.floor(wi/2) &&
+          this.value() > 1){
+
+        arrsize = this.value();
+        reset();
+
+      } else {
+        this.value(arrsize);
+        reset();
+      }
+  });
+  bStart = createButton('Sort!');
+
+  bStart.mousePressed(begin);
   // output:
   oAccesses = createP('');
 
 }
 
 function reset(){
-
+  bubblei = 0;
   pos = 0;
   loop(); // animate color changes to default. (in rare cases, this can cause a
           // crash due to a random array being sorted upon creation) to prevent
@@ -96,6 +112,9 @@ function draw() {
       break;
     case algs.betterBogo:
       betterBogoSort();
+      break;
+    case algs.bubble:
+      bubbleSort();
       break;
     default:
       break;
